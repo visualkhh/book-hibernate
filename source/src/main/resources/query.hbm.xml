@@ -1,0 +1,27 @@
+<hibernate-mapping>
+	<query name="MNQ_USER_FINDALL">from User</query>
+	<query name="MNQ_USER_FINDBYUSERNAME">
+		<![CDATA[from User where name = :id]]>
+	</query>
+	<sql-query name="MSQ_USER_FINDALL">
+	<![CDATA[select * from USER]]>
+	<return alias="e" class="com.khh.hibernate.chapter7.query.entity.User" />
+	</sql-query>
+
+	<sql-query name="MSQ_USER">
+	<![CDATA[
+	select * from USER
+	<%if(null != name && name.length()>0 ) {%>
+		WHERE  name = :name
+	<%}%>
+	]]>
+	<return alias="e" class="com.khh.hibernate.chapter7.query.entity.User" />
+	</sql-query>
+
+
+	<!--<sql-query name="SQL_GET_ALL_EMP_ADDRESS">-->
+	<!--<![CDATA[select {e.*}, {a.*} from Employee e join Address a ON e.emp_id=a.emp_id]]>-->
+	<!--<return alias="e" class="com.journaldev.hibernate.model.Employee" />-->
+	<!--<return-join alias="a" property="e.address"></return-join>-->
+	<!--</sql-query>-->
+</hibernate-mapping>

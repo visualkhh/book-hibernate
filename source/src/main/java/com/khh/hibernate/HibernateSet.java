@@ -93,7 +93,7 @@ public abstract class HibernateSet implements Runnable{
 			String url = configuration.getProperties().getProperty(Environment.URL);
 			String user = configuration.getProperties().getProperty(Environment.USER);
 			String pass = configuration.getProperties().getProperty(Environment.PASS);
-
+			log.debug("url:{} user:{} pass:{}",url,user,pass);
 			URL resource = Thread.currentThread().getContextClassLoader().getResource("schema.sql");
 			if(null!=resource) {
 				RunScript.execute(url, user, pass, new File(resource.getFile()).getAbsolutePath(), StandardCharsets.UTF_8, true);

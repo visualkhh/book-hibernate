@@ -65,6 +65,10 @@ public class OneToManySelectTest extends HibernateSet{
 
 
 
+
+
+
+
 	}
 
 	public static void main(String[] arg){

@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class UserId implements Serializable {
 	@Column(name = "USER_SEQ")
-	Integer seq;
+	Integer userSeq;
 
 	@Column(name = "USER_INFO_SEQ")
 	Integer userInfoSeq;

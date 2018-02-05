@@ -50,7 +50,8 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 		
 		<!-- hbm2ddl.auto ( e.g. validate | update | create | create-drop ) -->
-		<property name="hbm2ddl.auto">create-drop</property>
+		<!--<property name="hbm2ddl.auto">create-drop</property>-->
+		<property name="hbm2ddl.auto">none</property>
 		<!-- List of XML mapping files -->
 <!-- 		<mapping resource="Employee.hbm.xml" /> -->
 

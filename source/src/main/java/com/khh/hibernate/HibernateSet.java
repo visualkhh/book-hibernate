@@ -18,8 +18,11 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.io.File;
+import java.io.FileReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,8 +98,13 @@ public abstract class HibernateSet implements Runnable{
 			String pass = configuration.getProperties().getProperty(Environment.PASS);
 			log.debug("url:{} user:{} pass:{}",url,user,pass);
 			URL resource = Thread.currentThread().getContextClassLoader().getResource("schema.sql");
+
+			Class.forName ("org.h2.Driver");
+			Connection conn = DriverManager.getConnection (url, user,pass);
+
+
 			if(null!=resource) {
-				RunScript.execute(url, user, pass, new File(resource.getFile()).getAbsolutePath(), StandardCharsets.UTF_8, true);
+				RunScript.execute(conn, new FileReader(resource.getPath()));
 			}
 
 			StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
@@ -104,7 +112,8 @@ public abstract class HibernateSet implements Runnable{
 
 			resource = Thread.currentThread().getContextClassLoader().getResource("data.sql");
 			if(null!=resource) {
-				RunScript.execute(url, user, pass, new File(resource.getFile()).getAbsolutePath(), StandardCharsets.UTF_8, true);
+				RunScript.execute(conn, new FileReader(resource.getPath()));
+//				RunScript.execute(conn, new File(resource.getFile()).getAbsolutePath(), StandardCharsets.UTF_8, true);
 			}
 		}catch (Exception e){
 			log.error("init",e);

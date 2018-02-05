@@ -11,11 +11,15 @@ import javax.persistence.*;
 public class UserJoin2 {
 	@Id
 	@Column(name = "USER_SEQ")
-	Integer user_info_seq;
+	Integer userSeq;
 	String addr;
 	double weight;
 	double height;
 
-	@Column(table = "USER")
+	@Column(table = "USER", insertable = false, updatable = false)
 	String password;
+
+
+	@Column(table = "USER", name = "USER_INFO_SEQ", insertable = false, updatable = false)
+	Integer userInfoSeq;
 }
